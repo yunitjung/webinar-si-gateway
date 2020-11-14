@@ -38,6 +38,8 @@ $router->group(['prefix' => 'api'], function () use ($router){
             });
 
             $router->group(['middleware' => 'auth:admin_api'], function () use ($router){
+                $router->get('/auth/check-session', 'AuthController@checkSession');
+
                 $router->group(['prefix' => 'product'], function () use ($router){
                     $router->get('/list', 'ProductController@list');
                     $router->post('/find', 'ProductController@find');

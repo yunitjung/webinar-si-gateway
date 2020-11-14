@@ -9,7 +9,7 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 class AuthController extends Controller
 {
     use JsonResponse;
@@ -70,5 +70,13 @@ class AuthController extends Controller
         $token = $admin->createToken('AdminToken')->accessToken;
 
         return $this->responseWithCondition($token, 'Successfully generated token', 'Failed to generate token');
+    }
+
+    public function checkSession(Request $request){
+        if(Auth::guard('admin_api')->user()){
+            return $this->success('Session is still active');
+        }else {
+            return $this->fail('Session is no longer active');
+        }
     }
 }
