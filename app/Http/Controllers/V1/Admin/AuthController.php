@@ -39,6 +39,7 @@ class AuthController extends Controller
             if(Hash::check($request->password, $checkAdmin->password)){
 
                 $sessionAdmin = new \StdClass;
+                $sessionAdmin->id = $checkAdmin->id;
                 $sessionAdmin->name = $checkAdmin->name;
                 $sessionAdmin->email = $checkAdmin->email;
                 $sessionAdmin->is_active = $checkAdmin->is_active;
